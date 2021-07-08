@@ -1,4 +1,5 @@
 import 'package:dialog_service/dialog_service.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class DialogWidgets {
@@ -90,6 +91,7 @@ class DialogWidgets {
             text: okText,
             onPressed: () => Navigator.pop(context, true),
           ),
+          if (kIsWeb) const SizedBox(height: 20),
           _MenuButtonWidget(
             text: nonText,
             onPressed: () => Navigator.pop(context, false),
@@ -227,7 +229,7 @@ class _BottomUpDialogWidget extends StatelessWidget {
 
     return Image.asset(
       "icons/$iconName.png",
-      package: "animated_dialog_service",
+      package: "dialog_service",
       width: 100,
       height: 100,
     );

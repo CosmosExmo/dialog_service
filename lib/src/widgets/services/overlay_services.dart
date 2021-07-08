@@ -5,8 +5,9 @@ class OverlayServices {
   static OverlayEntry? _overlayEntry;
 
   static void insertOverlay(
-      BuildContext context, Function(BuildContext) builder) {
-    _overlayEntry = OverlayEntry(builder: builder as Widget Function(BuildContext));
+       BuildContext context, Function(BuildContext) builder) {
+    _overlayEntry =
+        OverlayEntry(builder: builder as Widget Function(BuildContext));
     Overlay.of(context)!.insert(_overlayEntry!);
   }
 

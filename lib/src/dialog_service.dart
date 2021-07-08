@@ -74,7 +74,7 @@ class DialogService {
   }
 
   Future<T?> _presentModal<T>(BuildContext context, Widget childWidget) async {
-    bool _fromTop = false;
+    //bool _fromTop = false;
 
     return await showGeneralDialog(
       barrierLabel: "kapat_text", //TODO: LOCALIZE HERE
@@ -92,7 +92,7 @@ class DialogService {
           opacity: new CurvedAnimation(parent: anim1, curve: Curves.easeOut),
           child: SlideTransition(
             position: Tween(
-                    begin: Offset(0, _fromTop ? -0.1 : 0.1), end: Offset(0, 0))
+                    begin: Offset(0, 0.1), end: Offset(0, 0))
                 .animate(anim1),
             child: child,
           ),
