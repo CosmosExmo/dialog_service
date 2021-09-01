@@ -6,7 +6,7 @@ class DialogService {
   Future<void> showErrorModalWithText(
     BuildContext context, {
     required String contentText,
-    String? actionText,
+    String actionText = "Tamam",
     bool scrollable = false,
     DialogType dialogType = DialogType.info,
   }) async {

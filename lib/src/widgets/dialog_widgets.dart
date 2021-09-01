@@ -31,8 +31,8 @@ class DialogWidgets {
 
   Widget textBottomUpDialog(
     BuildContext context, {
-    String contentText = "",
-    String? okText = "Tamam",
+    required String contentText,
+    required String okText,
     bool? scrollable,
     TextStyle? contentStyle,
     double borderRadius = 12,
