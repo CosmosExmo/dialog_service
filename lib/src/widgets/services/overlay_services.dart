@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-@immutable
 class OverlayServices {
   static OverlayEntry? _overlayEntry;
 

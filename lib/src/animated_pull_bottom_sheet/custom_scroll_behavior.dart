@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 enum MenuMode { DrawerMode, PullMenuMode }
@@ -54,10 +55,12 @@ class PullSheetPickerWidgetState extends State<PullSheetPickerWidget> {
   Curve curve = Curves.linear;
   ScrollPhysics? scrollPhysics;
 
-  double minHeight = 240;
-  double height = 240;
+  late double minHeight;
+  late double height;
 
   PullSheetPickerWidgetState(context) {
+    minHeight = kIsWeb ? MediaQuery.of(context).size.height * 0.6 : 240;
+    height = minHeight;
     maxHeight =
         MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
 
@@ -197,7 +200,8 @@ class _CustomScrollPhysics extends ScrollPhysics {
 
   @override
   double applyPhysicsToUserOffset(ScrollMetrics position, double offset) {
-    if (countryPickerWidgetState!.height >= countryPickerWidgetState!.maxHeight!) {
+    if (countryPickerWidgetState!.height >=
+        countryPickerWidgetState!.maxHeight!) {
       if (offset.sign == 1.0 && position.atEdge && position.pixels == 0.0) {
         this.countryPickerWidgetState!.changeHeightWhenDragged(-offset);
         return 0;
