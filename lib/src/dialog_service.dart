@@ -1,6 +1,6 @@
 part of dialog_service;
 
-enum DialogType { error, info, announcment }
+enum DialogType { error, info, announcment, none }
 
 class DialogService {
   Future<void> showErrorModalWithText(
@@ -41,6 +41,28 @@ class DialogService {
     );
 
     return await this._presentModal<bool>(context, widget);
+  }
+
+  Future<String?> showModalReturnString(
+    BuildContext context, {
+    required String titleText,
+    required String okText,
+    TextStyle? titleStyle,
+    double borderRadius = 12,
+    TextAlign? titleAlign,
+    DialogType dialogType = DialogType.none,
+  }) async {
+    final widget = DialogWidgets().inputDialog(
+      context,
+      titleText: titleText,
+      okText: okText,
+      titleStyle: titleStyle,
+      borderRadius: borderRadius,
+      titleAlign: titleAlign,
+      dialogType: dialogType,
+    );
+
+    return await this._presentModal<String?>(context, widget);
   }
 
   void showAnimatedPullBottomSheet(

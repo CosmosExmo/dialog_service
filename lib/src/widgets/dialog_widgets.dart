@@ -100,6 +100,61 @@ class DialogWidgets {
       ),
     );
   }
+
+  Widget inputDialog(
+    BuildContext context, {
+    required String titleText,
+    required String okText,
+    TextStyle? titleStyle,
+    double borderRadius = 12,
+    TextAlign? titleAlign,
+    DialogType dialogType = DialogType.none,
+  }) {
+    final _controller = TextEditingController();
+    return _BottomUpDialogWidget(
+      dialogType: dialogType,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          SelectableText(
+            titleText,
+            style: titleStyle ?? Theme.of(context).dialogTheme.contentTextStyle,
+            textAlign: titleAlign,
+          ),
+          const SizedBox(height: 20),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                color: Theme.of(context).cardColor,
+                borderRadius: BorderRadius.circular(borderRadius),
+                boxShadow: [
+                  BoxShadow(
+                    color: Theme.of(context).highlightColor,
+                    blurRadius: 0.5,
+                    spreadRadius: 0.5,
+                    offset: const Offset(0.0, 0.0),
+                  )
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                    controller: _controller,
+                    maxLines: null,
+                    decoration: InputDecoration()),
+              ),
+            ),
+          ),
+          _MenuButtonWidget(
+            text: okText,
+            onPressed: () => Navigator.pop(context, _controller.text),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class _MenuButtonWidget extends StatelessWidget {
@@ -181,22 +236,23 @@ class _BottomUpDialogWidget extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: RepaintBoundary(
-                    child: TweenAnimationBuilder<double>(
-                      tween: Tween(begin: 0.2, end: 1.0),
-                      duration: Duration(milliseconds: 800),
-                      curve: Curves.elasticOut,
-                      builder: (context, value, _) {
-                        return Transform.scale(
-                          scale: value,
-                          child: _getIcon(),
-                        );
-                      },
+                if (dialogType != DialogType.none)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: RepaintBoundary(
+                      child: TweenAnimationBuilder<double>(
+                        tween: Tween(begin: 0.2, end: 1.0),
+                        duration: Duration(milliseconds: 800),
+                        curve: Curves.elasticOut,
+                        builder: (context, value, _) {
+                          return Transform.scale(
+                            scale: value,
+                            child: _getIcon(),
+                          );
+                        },
+                      ),
                     ),
                   ),
-                ),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
