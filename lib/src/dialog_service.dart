@@ -115,9 +115,8 @@ class DialogService {
         return FadeTransition(
           opacity: new CurvedAnimation(parent: anim1, curve: Curves.easeOut),
           child: SlideTransition(
-            position: Tween(
-                    begin: Offset(0, 0.1), end: Offset(0, 0))
-                .animate(anim1),
+            position:
+                Tween(begin: Offset(0, 0.1), end: Offset(0, 0)).animate(anim1),
             child: child,
           ),
         );

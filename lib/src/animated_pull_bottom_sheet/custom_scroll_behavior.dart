@@ -46,7 +46,7 @@ class PullSheetPickerWidget extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return PullSheetPickerWidgetState(context);
+    return PullSheetPickerWidgetState(context, minHeightApp);
   }
 }
 
@@ -60,9 +60,9 @@ class PullSheetPickerWidgetState extends State<PullSheetPickerWidget> {
   late double minHeight;
   late double height;
 
-  PullSheetPickerWidgetState(context) {
+  PullSheetPickerWidgetState(context, double minHeightApp) {
     minHeight =
-        kIsWeb ? MediaQuery.of(context).size.height * 0.6 : widget.minHeightApp;
+        kIsWeb ? MediaQuery.of(context).size.height * 0.6 : minHeightApp;
     height = minHeight;
     maxHeight =
         MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
