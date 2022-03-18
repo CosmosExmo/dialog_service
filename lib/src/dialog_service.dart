@@ -69,12 +69,14 @@ class DialogService {
     BuildContext context, {
     required Widget child,
     bool showTitle = false,
+    double minHeightApp = 240,
     String? titleText,
   }) {
     Widget _builder(BuildContext context) {
       return PullSheetPickerWidget(
         context: context,
         title: titleText,
+        minHeightApp: minHeightApp,
         showTitle: showTitle,
         child: child,
         onEmptySpaceTabbed: () {

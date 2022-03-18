@@ -20,6 +20,7 @@ _FlingGestureKind _describeFlingGesture(double velocity) {
 
 class PullSheetPickerWidget extends StatefulWidget {
   final double dismissThreshold;
+  final double minHeightApp;
 
   final BuildContext? context;
 
@@ -34,6 +35,7 @@ class PullSheetPickerWidget extends StatefulWidget {
   const PullSheetPickerWidget({
     Key? key,
     this.dismissThreshold = 50,
+    this.minHeightApp = 240,
     this.context,
     this.child,
     this.title,
@@ -59,7 +61,8 @@ class PullSheetPickerWidgetState extends State<PullSheetPickerWidget> {
   late double height;
 
   PullSheetPickerWidgetState(context) {
-    minHeight = kIsWeb ? MediaQuery.of(context).size.height * 0.6 : 240;
+    minHeight =
+        kIsWeb ? MediaQuery.of(context).size.height * 0.6 : widget.minHeightApp;
     height = minHeight;
     maxHeight =
         MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
