@@ -47,19 +47,33 @@ class DialogService {
     BuildContext context, {
     required String titleText,
     required String okText,
+    required String nonText,
     TextStyle? titleStyle,
     double borderRadius = 12,
     TextAlign? titleAlign,
     DialogType dialogType = DialogType.none,
+    TextInputType? keyboardType,
+    List<TextInputFormatter>? inputFormatters,
+    InputDecoration? inputDecoration,
+    Color? buttonColor,
+    TextStyle? buttonTextStyle,
+    double? buttonHeight,
   }) async {
     final widget = DialogWidgets().inputDialog(
       context,
       titleText: titleText,
       okText: okText,
+      nonText: nonText,
       titleStyle: titleStyle,
       borderRadius: borderRadius,
       titleAlign: titleAlign,
       dialogType: dialogType,
+      keyboardType: keyboardType,
+      inputFormatters: inputFormatters,
+      inputDecoration: inputDecoration,
+      buttonColor: buttonColor,
+      buttonTextStyle: buttonTextStyle,
+      buttonHeight: buttonHeight,
     );
 
     return await this._presentModal<String?>(context, widget);

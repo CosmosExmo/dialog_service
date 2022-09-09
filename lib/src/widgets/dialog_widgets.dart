@@ -1,6 +1,7 @@
 import 'package:dialog_service/dialog_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class DialogWidgets {
   Widget alertDialog(
@@ -105,10 +106,17 @@ class DialogWidgets {
     BuildContext context, {
     required String titleText,
     required String okText,
+    required String nonText,
     TextStyle? titleStyle,
     double borderRadius = 12,
     TextAlign? titleAlign,
     DialogType dialogType = DialogType.none,
+    TextInputType? keyboardType,
+    List<TextInputFormatter>? inputFormatters,
+    InputDecoration? inputDecoration,
+    Color? buttonColor,
+    TextStyle? buttonTextStyle,
+    double? buttonHeight,
   }) {
     final _controller = TextEditingController();
     return _BottomUpDialogWidget(
@@ -141,15 +149,29 @@ class DialogWidgets {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
-                    controller: _controller,
-                    maxLines: null,
-                    decoration: InputDecoration()),
+                  controller: _controller,
+                  maxLines: null,
+                  decoration: inputDecoration,
+                  keyboardType: keyboardType,
+                  inputFormatters: inputFormatters,
+                ),
               ),
             ),
           ),
           _MenuButtonWidget(
             text: okText,
             onPressed: () => Navigator.pop(context, _controller.text),
+            buttonColor: buttonColor,
+            buttonTextStyle: buttonTextStyle,
+            buttonHeight: buttonHeight,
+          ),
+          if (kIsWeb) const SizedBox(height: 20),
+          _MenuButtonWidget(
+            text: nonText,
+            onPressed: () => Navigator.pop(context),
+            buttonColor: buttonColor,
+            buttonTextStyle: buttonTextStyle,
+            buttonHeight: buttonHeight,
           ),
         ],
       ),
@@ -160,16 +182,16 @@ class DialogWidgets {
 class _MenuButtonWidget extends StatelessWidget {
   final Function onPressed;
   final String? text;
-  final Color? color;
-  final TextStyle? textStyle;
-  final double height;
+  final Color? buttonColor;
+  final TextStyle? buttonTextStyle;
+  final double? buttonHeight;
   const _MenuButtonWidget({
     Key? key,
     required this.onPressed,
     required this.text,
-    this.color,
-    this.textStyle,
-    this.height = 35,
+    this.buttonColor,
+    this.buttonTextStyle,
+    this.buttonHeight,
   }) : super(key: key);
 
   @override
@@ -183,14 +205,14 @@ class _MenuButtonWidget extends StatelessWidget {
           child: Text(
             text!,
             textAlign: TextAlign.center,
-            style: textStyle,
+            style: buttonTextStyle,
           ),
           style: ElevatedButton.styleFrom(
-            minimumSize: Size.fromHeight(height),
+            minimumSize: Size.fromHeight(buttonHeight ?? 35),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
-            primary: color,
+            backgroundColor: buttonColor,
           ),
         ),
       ),
